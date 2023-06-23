@@ -43,10 +43,14 @@ app.get("/tweets", (req, res) => {
         const novoget = {username: tweeteach.username, avatar: tweetcorreto.avatar, tweet: tweeteach.tweet }
         tweetsget.push(novoget)
 
+        const reversedTweets = tweetsget.reverse()
+        const limitedTweets = reversedTweets.slice(0, 10)
+
+  res.send(limitedTweets);
+
     })
 
-    res.send(tweetsget)
-})
+
 
 
 
