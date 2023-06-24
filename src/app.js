@@ -45,7 +45,11 @@ app.get("/tweets", (req, res) => {
 
     })
 
-    res.send(tweetsget)
+    const reversedTweets = tweetsget.reverse()
+    const limitedTweets = reversedTweets.slice(0, 10)
+
+res.send(limitedTweets);
+
 })
 
 
@@ -53,3 +57,4 @@ app.get("/tweets", (req, res) => {
 const PORT = 5000
 
 app.listen(PORT, () => console.log("Servidor rodando"))
+
