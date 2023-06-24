@@ -7,7 +7,7 @@ app.use(cors())
 
 const usernames = []
 const tweets = []
-const tweetsget = []
+let tweetsget = []
 
 app.post("/sign-up", (req, res) => {
 
@@ -23,7 +23,7 @@ app.post("/tweets", (req, res) => {
 
     const { username, tweet } = req.body
 
-    if (!usernames.some( usuario => usuario.username == username )) {
+    if (!usernames.some(usuario => usuario.username == username)) {
         res.send("UNAUTHORIZED")
     } else {
 
@@ -37,23 +37,19 @@ app.get("/tweets", (req, res) => {
 
     const { username, avatar } = usernames
 
+    tweetsget = []
+
     tweets.forEach((tweeteach) => {
 
         const tweetcorreto = usernames.find((tw) => tw.username === tweeteach.username)
-        const novoget = {username: tweeteach.username, avatar: tweetcorreto.avatar, tweet: tweeteach.tweet }
+        const novoget = { username: tweeteach.username, avatar: tweetcorreto.avatar, tweet: tweeteach.tweet }
         tweetsget.push(novoget)
-
-        const reversedTweets = tweetsget.reverse()
-        const limitedTweets = reversedTweets.slice(0, 10)
-
-  res.send(limitedTweets);
 
     })
 
     const reversedTweets = tweetsget.reverse()
     const limitedTweets = reversedTweets.slice(0, 10)
-
-res.send(limitedTweets);
+    res.send(limitedTweets)
 
 })
 
